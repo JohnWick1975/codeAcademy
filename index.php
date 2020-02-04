@@ -15,7 +15,23 @@ $array = [
         'url' => 'https://f.vividscreen.info/soft/25dd54eb81f5ed241345cea9ab9fd85d/Green-Landscape-640x480.jpg',
         'alt' => 'image-three',
         'text' => 'third picture nature'
-    ]
+    ],
+    [
+        'url' => 'https://f1.mylove.ru/4KY021swhF.jpg',
+        'alt' => 'image-four',
+        'text' => 'fourth picture nature'
+    ],
+    [
+        'url' => 'https://i.pinimg.com/736x/e4/34/2a/e4342a9424f181d5e5490e4e8d4ecdec.jpg',
+        'alt' => 'image-five',
+        'text' => 'fifth picture nature'
+    ],
+    [
+        'url' => 'https://heaclub.ru/tim/f4be2539da08b349624e565beb9db0f7.jpg',
+        'alt' => 'image-six',
+        'text' => 'sixth picture nature'
+    ],
+
 ];
 ?>
 
@@ -29,18 +45,35 @@ $array = [
         <title>Images-foreach</title>
         <style>
             section {
-                padding-top: 10%;
-                display: flex;
-                justify-content: center;
-            }
-
-            .imageContainer {
                 margin: 0 auto;
-                text-align: center;
-                display: inline-block;
-                width: 30%;
+                padding-top: 10%;
+                width: 80%;
             }
 
+            @media screen and (min-width: 1025px) {
+                .imageContainer {
+                    margin-right: 8px;
+                    text-align: center;
+                    display: inline-block;
+                    width: calc((100% - 24px) / 3);
+                }
+                .imageContainer:nth-child(3n) {
+                    margin-right: 0px;
+                }
+
+            }
+            @media screen and (max-width: 1024px) {
+                .imageContainer {
+                    display: inline-block;
+                    margin-right: 8px;
+                    text-align: center;
+                    width: calc((100% - 16px) / 2);
+                }
+
+                .imageContainer:nth-child(2n) {
+                    margin-right: 0;
+                }
+            }
             img {
                 object-fit: cover;
                 width: 100%;
