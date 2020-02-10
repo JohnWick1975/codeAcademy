@@ -1,39 +1,40 @@
 <?php
-$names = ['Deinius', 'Petras', 'Tadas'];
-var_dump($names);
-//failo prijungimas
-$file = "text.txt";
+$servername = "localhost";
+$username = "root";
+$password = '';
+$dbname = 'data_base';
 
-$fo = fopen($file, 'a') or die("can't open file");
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-
-fwrite($fo, implode($names, ", ") . ", " . "\n");
-
-fclose($fo);
-
-$content = file($file);
-var_dump($content);
-$new_array = [];
-foreach ($content as $value) {
-    $array = explode(", ", $value);
-    array_pop($array);
-    array_push($new_array, $array);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-var_dump($new_array);
+echo "Connected successfully";
 
-//rasom su file_put_content!
-
-$names2 = ['Vitalik', 'Natali', 'Martin'];
-var_dump($names2);
-$file2 = "text2.txt";
-file_put_contents($file2, implode($names2, ", ") . ", " . "\n", FILE_APPEND);
-$content2 = file($file2);
-var_dump($content2);
-$new_array2 = [];
-foreach ($content2 as $value) {
-    $array2 = explode(", ", $value);
-    array_pop($array2);
-    array_push($new_array2, $array2);
+function get($conn, $sql)
+{
+    $result = mysqli_query($conn, $sql);
+    return $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-var_dump($new_array2);
-?>
+
+$sql = "SELECT `id`, `user_name`, `email`, `password` FROM `user` WHERE 1";
+
+$data = get($conn, $sql);
+var_dump($data);
+
+function table($data)
+{
+    print '<table class="m-auto text-center bg-light">';
+    foreach (array_keys($data[0]) as $value){
+        print '<th class="border border-dark p-3">' . $value . '</th>';
+    }
+    foreach ($data as $users){
+        print '<tr class="border border-dark p-3">';
+        foreach ($users as $user){
+            print '<td class="border border-dark p-3">' . $user . '</td>';
+        }
+        print '</tr>';
+    }
+}

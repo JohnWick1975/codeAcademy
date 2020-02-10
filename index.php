@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
+        <div class="container">
+            <?php table($data); ?>
+        </div>
 
         <script type="text/javascript" src="assets/js/jquery.js"></script>
         <script type="text/javascript" src="assets/js/bootstrap.bundle.js"></script>
